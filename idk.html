@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch Me If You Can</title>
+  <style>
+    #escape-text {
+      font-size: 24px;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="escape-text">Catch me if you can! 😜</h1>
+
+  <script>
+    const text = document.getElementById('escape-text');
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = text.getBoundingClientRect();
+      const distanceX = Math.abs(e.clientX - (rect.left + rect.width / 2));
+      const distanceY = Math.abs(e.clientY - (rect.top + rect.height / 2));
+
+      if (distanceX < 100 && distanceY < 50) {
+        const newX = Math.random() * (window.innerWidth - rect.width);
+        const newY = Math.random() * (window.innerHeight - rect.height);
+        text.style.left = `${newX}px`;
+        text.style.top = `${newY}px`;
+      }
+    });
+  </script>
+</body>
+</html>
