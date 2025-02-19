@@ -37,6 +37,38 @@
     </font>
   </header>
 
+    <button size=10 style="background-color:blue;border-radius:25px" onclick="translatePage('en')">English</button>
+    <button style="background-color:red;border-radius:25px"onclick="translatePage('sk')">Slovak</button>
+    
+    <div id="google_translate_element"></div>
+    
+    <script>
+        function loadGoogleTranslate() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateInit';
+            document.body.appendChild(script);
+        }
+
+        function googleTranslateInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,sk'}, 'google_translate_element');
+        }
+
+        function translatePage(lang) {
+            if (!document.querySelector(".goog-te-combo")) {
+                loadGoogleTranslate();
+                setTimeout(() => {
+                    document.querySelector(".goog-te-combo").value = lang;
+                    document.querySelector(".goog-te-combo").dispatchEvent(new Event("change"));
+                }, 1000);
+            } else {
+                document.querySelector(".goog-te-combo").value = lang;
+                document.querySelector(".goog-te-combo").dispatchEvent(new Event("change"));
+            }
+        }
+    </script>
+
+
   <section>
     <p>League of Legends, je online videohra z roku 2009 vyvinutá a publikovaná spoločnosťou Riot 
     Games.</p><br>
